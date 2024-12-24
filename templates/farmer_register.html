@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .text-muted {
+            text-align: center;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #04AA6D;
+            box-shadow: 0 0 8px rgba(4, 170, 109, 0.3);
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #039f63;
+        }
+
+        .box {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>SIGNUP</h1>
+            <p class="text-muted">Please enter details to create an account</p>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
+                {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
+                {% render_field userForm.username class="form-control" placeholder="Username" %}
+                {% render_field userForm.password class="form-control" placeholder="Password" %}
+                {% render_field farmerForm.address class="form-control" placeholder="Address" %}
+                {% render_field farmerForm.mobile class="form-control" placeholder="Mobile" %}
+                <label for="profile_pic">Profile Picture</label>
+                {% render_field farmerForm.profile_pic class="form-control" %}
+                <input type="submit" value="Register">
+                <p class="text-muted" style="text-align: center; margin-top: 15px;">
+                    <a href="{% url 'farmer-logins' %}">I am already a member</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

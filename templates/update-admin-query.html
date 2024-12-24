@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #575757;
+        }
+        .view-queries {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff; /* Blue background for the view link */
+            color: white;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .view-queries:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Replay Form</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="query">Querys</label>
+            {% render_field queryForm.query class="form-control"%}
+            <label for="replay">Your Replay</label>
+            <input type="text" name="replay" id="replay" class="form-control">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+</html>

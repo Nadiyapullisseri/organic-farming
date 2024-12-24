@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        .search-bar {
+            display: flex;
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-bar button {
+            padding: 10px;
+            border: none;
+            background-color: #1abc9c;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .search-bar button:hover {
+            background-color: #16a085;
+        }
+        .cart {
+            position: relative;
+            cursor: pointer;
+        }
+        .cart-icon {
+            font-size: 20px;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 5px;
+            font-size: 12px;
+        }
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .product {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .product h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .product p {
+            font-size: 14px;
+            color: #555;
+        }
+        .product button {
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product button:hover {
+            background-color: #16a085;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="#" class="logo">ShopLogo</a>
+        <form class="search-bar" action="{% url 'cart-search' %}" method="GET">
+            <input type="search" name="query" id="query" placeholder="Search for products...">
+            <button type="submit">Search</button>
+        </form>
+        <div class="cart">
+            <a href="{% url 'cart-page' %}" class="cart-icon">🛒</a>
+            <span class="cart-count">{{ product_count_in_cart }}</span> <!-- Example count -->
+        </div>
+    </div>
+    
+    <div class="product-container">
+        {% for p in products %}
+        <div class="product">
+            <img src="{% static p.product_image.url %}" alt="{{ p.product_name }}">
+            <h3>{{ p.product_name }}</h3>
+            <p>{{ p.product_price }}</p>
+            <form action="{% url 'add-to-cart' p.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    
+
+  
+</body>
+</html>

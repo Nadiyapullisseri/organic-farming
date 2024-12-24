@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .side-navbar {
+            background-color: rgb(13, 13, 97);
+            color: white;
+            width: 200px;
+            padding: 15px;
+        }
+
+        .side-navbar h2 {
+            color: #fff;
+        }
+
+        .side-navbar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .side-navbar li {
+            margin: 15px 0;
+        }
+
+        .side-navbar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .side-navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-navbar {
+            background-color: rgb(71, 64, 137);
+            color: white;
+            padding: 15px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgb(13, 13, 97);
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="side-navbar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="{% url 'farmer-product' %}">Products</a></li>
+                <li><a href="{% url 'farmer-profile' profile.id %}">Profile</a></li>
+                <li><a href="{% url 'farmer-query' %}">Querys</a></li>
+                <li><a href="{% url 'farmer-notice-view' %}">Notices</a></li>
+                <li><a href="{% url 'farmer-logout'  %}">Logout</a></li>
+
+            </ul>
+        </nav>
+        <div class="main-content">
+            <header class="top-navbar">
+                <h1>Dashboard Title</h1>
+            </header>
+            
+        </div>
+    </div>
+</body>
+</html>

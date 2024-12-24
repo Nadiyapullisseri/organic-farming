@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .side-navbar {
+            background-color: rgb(13, 13, 97);
+            color: white;
+            width: 200px;
+            padding: 15px;
+        }
+
+        .side-navbar h2 {
+            color: #fff;
+        }
+
+        .side-navbar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .side-navbar li {
+            margin: 15px 0;
+        }
+
+        .side-navbar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .side-navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-navbar {
+            background-color: rgb(71, 64, 137);
+            color: white;
+            padding: 15px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-header img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            margin-right: 20px;
+            border: 4px solid #007bff;
+        }
+
+        .profile-header h2 {
+            color: #007bff;
+            margin: 0;
+        }
+
+        .details h3 {
+            color: #007bff;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .details p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgb(13, 13, 97);
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="side-navbar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="{% url 'farmer-product' %}">Products</a></li>
+                <li><a href="{% url 'farmer-profile' profile.id %}">Profile</a></li>
+                <li><a href="{% url 'farmer-query' %}">Queries</a></li>
+                <li><a href="{% url 'farmer-notice-view' %}">Notices</a></li>
+                <li><a href="{% url 'farmer-logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="main-content">
+            <header class="top-navbar">
+                <h1>Dashboard Title</h1>
+            </header>
+            <div class="content">
+                <div class="profile-header">
+                    <img src="{% static profile.profile_pic.url %}" alt="{{ profile.user }}">
+                    <div>
+                        <h2>{{ profile.user }}</h2>
+                        <p>Organic Farmer </p>
+                    </div>
+                </div>
+
+                <div class="details">
+                    <h3>Contact Information</h3>
+                    <p><strong>Phone:</strong>{{ profile.mobile }}</p>
+                </div>
+
+                <div class="details">
+                    <h3>About Me</h3>
+                    <p>With over 10 years of experience in organic farming, I am dedicated to producing high-quality, sustainable crops. I practice crop rotation and composting to enrich the soil and promote biodiversity on my farm.</p>
+                </div>
+
+                <div class="details">
+                    <h3>Farming Practices</h3>
+                    <ul>
+                        <li>Organic Crop Production</li>
+                        <li>Permaculture Design</li>
+                        <li>Soil Health Management</li>
+                        <li>Water Conservation Techniques</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

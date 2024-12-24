@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .side-navbar {
+            background-color: rgb(13, 13, 97);
+            color: white;
+            width: 200px;
+            padding: 15px;
+        }
+
+        .side-navbar h2 {
+            color: #fff;
+        }
+
+        .side-navbar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .side-navbar li {
+            margin: 15px 0;
+        }
+
+        .side-navbar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .side-navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-navbar {
+            background-color: rgb(71, 64, 137);
+            color: white;
+            padding: 15px;
+        }
+
+        .top-navbar h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgb(13, 13, 97);
+            color: white;
+            border-radius: 5px; /* Change to a rectangle if you prefer */
+            padding: 10px 15px; /* Adjust padding for text */
+            text-align: center;
+            font-size: 16px; /* Adjust font size */
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-decoration: none; /* Remove underline */
+        }
+
+        .float:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .side-navbar {
+                width: 100%;
+                height: auto;
+            }
+
+            .main-content {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="side-navbar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="main-content">
+            <header class="top-navbar">
+                <h1>Dashboard Title</h1>
+            </header>
+            <div class="content">
+                <h1 class="text-center">Product List</h1>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Image</th>
+                            <th>Product Price</th>
+                            <th>Product Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if products %}
+                        {% for p in products %}
+                        <tr>
+                            <td>{{ p.product_name }}</td>
+                            <!-- <td><img src="{% static p.product_image.url %}" alt="product image" height="40" width="40" /></td> -->
+                            <!-- <td><img src="{% static 'product_image/{{ p.product_image }}' %}" alt="product image" height="40" width="40" /></td> -->
+                            <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+                            <td>{{ p.product_price }}</td>
+                            <td>{{ p.product_discription }}</td>
+                            <td>
+                                <a href="{% url 'edit-farmer-product' p.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{% url 'delete-farmer-product' p.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center">No products available</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                <a href="/farmer-add-product" class="float" title="Add Product">Add Product</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
